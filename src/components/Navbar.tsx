@@ -5,6 +5,7 @@ import { AppDispatch } from '../app/store'
 import { getListing } from '../features/CRUD'
 import decode from 'jwt-decode'
 import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
 
 function Navbar() {
 
@@ -33,6 +34,8 @@ function Navbar() {
     }
   },[location])
 
+  let [isOpen,setIsOpen] = useState(false)
+
   const handleSearch = (e:React.MouseEvent<HTMLButtonElement>)=>{
     e.preventDefault()
     navigate(`/search?searchTerm=${searchTerm}`)
@@ -40,6 +43,18 @@ function Navbar() {
 
   return (<>
     <div className="border-b lg:justify-around shadow-md flex justify-between h-16 items-center w-full md:w-8/10 px-5 gap-2 sm:0 md:mx-auto bg-slate-200">
+      <div className='sm:hidden relative '>
+        <MenuIcon onClick={()=>setIsOpen(prev=>!prev)} className='cursor-pointer' />
+        {isOpen && <div className='absolute left-1 bg-white border flex flex-col rounded-sm'>
+          <NavLink onClick={()=>setIsOpen(false)} to={'/about'} className={'text-sm text-slate-500 py-1 px-3 font-semibold border-t'}>About</NavLink>
+            { !user && <NavLink className={({isActive})=>(isActive ? ' font-semibold underline': ' hover:underline ')+'text-sm px-3 py-1 border-t font-semibold text-slate-500 '} to={'/auth'}>
+                  <button onClick={()=>setIsOpen(false)} className='whitespace-nowrap'> Sign In</button>
+              </NavLink>}
+              {user && <NavLink className={({isActive})=>(isActive ? ' font-semibold underline': ' hover:underline ')+'text-sm px-3 py-1 border-t font-semibold text-slate-500 '} to={'/profile'}>
+                  <button onClick={()=>setIsOpen(false)} className='whitespace-nowrap'>Profile</button>
+              </NavLink>}
+        </div>}
+      </div>
         <NavLink to={'/'} ><p className="text-slate-600 w-auto font-bold text-md sm:text-xl">ProFound<span className="text-gray-800 ">Properties</span></p></NavLink>
         <div className='flex items-center relative border pr-2 rounded-lg'>
           <input name='searchTerm' value={searchTerm } onChange={(e)=>{setSearchTerm(e.target.value)}} placeholder="Search..." type="text" className="text-sm sm:text-md md:w-80 outline-none sm:w-52 p-2 rounded-lg w-40" />
@@ -51,7 +66,7 @@ function Navbar() {
             </NavLink>
             <NavLink to={'/about'} className={({isActive})=>(isActive ? 'invisible sm:visible font-semibold underline': 'invisible sm:visible hover:underline ') + (' hidden sm:inline-flex')} > <button className='hover:underline'>About</button> 
             </NavLink>
-            { !user && <NavLink className={({isActive})=>(isActive ? ' font-semibold underline': ' hover:underline ')} to={'/auth'}>
+            { !user && <NavLink className={({isActive})=>(isActive ? ' font-semibold underline': ' hover:underline ')+(' hidden sm:inline-flex')} to={'/auth'}>
                 <button className='whitespace-nowrap'>Sign In</button>
             </NavLink>}
             { user && <NavLink to={'/profile'}>
