@@ -36,7 +36,7 @@ function CreateListing() {
         if(!user)navigate('/auth')
     },[])
 
-    let [files,setFiles] = useState(Array<File>)
+    let [files,setFiles] = useState<any[]>([])
     let [loading,setLoading] = useState(false)
 
     const onChangeHandler = (event:React.ChangeEvent<HTMLInputElement > | React.ChangeEvent<HTMLTextAreaElement> | React.BaseSyntheticEvent)=>{
@@ -110,7 +110,11 @@ function CreateListing() {
                 <p><span className="font-semibold text-slate-800">Images:</span> The first image will be the cover(max 6)</p>
                 <div className="flex justify-between">
                     <input  className="border p-3 border-gray-400" type="file" accept='image/*'
-              multiple onChange={(e)=>setFiles([...e.target.files])} />
+              multiple onChange={(e:any)=>{
+                for (const file of e.target.files){
+                    setFiles(prev=>[...prev,file])
+                }                
+                }} />
                     <button type="button" className="border uppercase font-bold p-3 border-green-700 text-green-700 rounded-lg" onClick={onSubmitUpload} >{loading ? 'Uploading...' : 'Upload'}</button>
                 </div>
                 <button className="w-full font-bold uppercase text-center bg-slate-800 p-3 rounded-lg text-white" type="submit">{ state ? 'Update Lising' : 'Create Listing' }</button>
