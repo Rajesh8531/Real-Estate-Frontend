@@ -1,7 +1,7 @@
 import axios from "axios";
 import {createAsyncThunk} from '@reduxjs/toolkit'
 
-const API = axios.create({baseURL : 'http://localhost:3000/'})
+const API = axios.create({baseURL : 'https://real-estate-backend-ndim.onrender.com'})
 
 API.interceptors.request.use((req)=>{
     if(localStorage.getItem('profile')){
