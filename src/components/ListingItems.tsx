@@ -36,7 +36,7 @@ function ListingItems({listings,heading,more,searchLink}:props) {
                         listings.map(item=>(
                             <SwiperSlide key={item._id}>
                                 <div key={item._id} className="mb-12">
-                                    <NavLink to={`/listing/${item._id}`}>
+                                    <NavLink className={'w-full sm:w-[300px]'} to={`/listing/${item._id}`}>
                                         <ListingCard props={item} />
                                     </NavLink>
                                 </div>
