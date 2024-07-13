@@ -25,7 +25,7 @@ function ListingItems({listings,heading,more,searchLink}:props) {
   return (<div >
         <h1 className="text-2xl font-semibold text-gray-600">{heading}</h1>
         <NavLink to={searchLink} className={'text-sm text-indigo-800 hover:underline'}>{more}</NavLink>
-        <div className="w-full  flex flex-wrap gap-6 mt-1">
+        <div className="w-screen  flex flex-wrap gap-6 mt-1">
             <Swiper
                 modules={[Navigation,A11y,Pagination]}
                 spaceBetween={50}
