@@ -4,7 +4,7 @@ function ListingCard({props} :any) {
     let {address,baths,beds,description,discountPrice,price,title,type} = props
     let imageUrl = props?.ImageURL[0]
   return (
-    <div className="shadow-md gap-7 cursor-pointer border rounded-lg flex overflow-hidden bg-white flex-col justify-center w-full">
+    <div className="shadow-md gap-7 cursor-pointer border rounded-lg flex overflow-hidden bg-white flex-col justify-center w-fit">
         <img src={imageUrl} className="h-[320px] sm:h-[220px] w-full object-fill hover:scale-105 transition-scale duration-300" />
         <div className='flex flex-col gap-2 px-3 mb-3'>
         <h1 className='truncate text-xl text-slate-600 font-semibold capitalize'>{title}</h1>
